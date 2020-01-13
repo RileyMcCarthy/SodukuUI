@@ -15,11 +15,29 @@ public class Cell {
     private ArrayList<Integer> options;
     private boolean original = false;
     private int value = 0;
+    private int row = 0;
+    private int col = 0;
     
     public Cell() {
         options = new ArrayList<Integer>();
     }
-    
+
+    public void setRow(int theRow) {
+        row = theRow;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setCol(int theCol) {
+        col = theCol;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
     public void setOptions(ArrayList<Integer> theOptions) {
         options = theOptions;
     }

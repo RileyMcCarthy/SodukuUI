@@ -20,6 +20,10 @@ public class Board {
         boardList = new ArrayList<Cell>();
         initBoardList(theBoard);
     }
+
+    public Cell getCell(int pos) {
+        return boardList.get(pos);
+    }
     
     public ArrayList<Integer> getCellOptions(int pos) {
         updateCellOptions(pos);
@@ -27,6 +31,11 @@ public class Board {
     }
     
     public int getCellValue(int pos) {
+        return boardList.get(pos).getValue();
+    }
+
+    public int getCellValue(int row, int col) {
+        int pos = row*9+col;
         return boardList.get(pos).getValue();
     }
     
@@ -60,6 +69,9 @@ public class Board {
                     temp.setOriginal(true);
                 }
                 temp.setValue(theBoard[row][col]);
+                System.out.println("ROWS: "+row);
+                temp.setRow(row);
+                temp.setCol(col);
                 boardList.add(temp);
             }
         }
