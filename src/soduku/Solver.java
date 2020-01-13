@@ -88,6 +88,8 @@ public class Solver {
     public Cell getNextStep() {
         if (theSteps == null)
             theSteps = steps.iterator();
+        if (!theSteps.hasNext())
+            return null;
         return theSteps.next();
     }
 

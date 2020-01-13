@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
@@ -52,7 +53,16 @@ public class Interface extends Application {
     stage.show();
     }
 
-    public void updateCell(int row, int col, int value) {
+    public void updateCell(int row, int col, int value, boolean original) {
+        if (!original) {
+            if (value ==0) {
+                cells[row][col].setTextFill(Color.BLACK);
+                //cells[row][col].setStyle("-fx-background-color:WHITE;-fx-border-color: black;");
+            }else {
+                cells[row][col].setTextFill(Color.GREEN);
+                //cells[row][col].setStyle("-fx-background-color:GREEN;-fx-border-color: black;");
+            }
+        }
         cells[row][col].setText(Integer.toString(value));
     }
 
