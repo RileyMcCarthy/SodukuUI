@@ -18,13 +18,21 @@ public class Controller {
     public Controller(Interface theGui) {
         gui = theGui;
         level = new Soduku();
+    }
+
+    public void initBoard() {
         Board solved = level.getSolvedBoard();
         for (int i=0;i<81;i++) {
             Cell temp = solved.getCell(i);
             if (temp.isOriginal()) {
                 gui.updateCell(temp.getRow(), temp.getCol(), temp.getValue(),true);
+            }else {
+                gui.updateCell(temp.getRow(), temp.getCol(), 0,false);
             }
         }
+    }
+
+    public void startSolving() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(0.01), e-> {
 
             Cell temp = level.getNextStep();
@@ -41,6 +49,14 @@ public class Controller {
             }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    public void pause() {
+        timeline.pause();
+    }
+
+    public void resume() {
         timeline.play();
     }
 

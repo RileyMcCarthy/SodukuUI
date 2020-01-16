@@ -1,10 +1,13 @@
 package gui;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -20,7 +23,34 @@ public class Interface extends Application {
     public void start(Stage theStage) throws Exception {
     stage = theStage;
     stage.setTitle("Soduku");
+    BorderPane borderPane = new BorderPane();
+    ToolBar toolBar = new ToolBar();
+    Button newGame = new Button("New");
+    Button openGame = new Button("Open");
+    toolBar.getItems().addAll(newGame, openGame);
+    VBox vBox = new VBox();
+    Button solve = new Button("Start Solving");
+    solve.setOnAction((ActionEvent even) -> {
+        System.out.println("solving!");
+        controller.startSolving();
+    });
+    Button pause = new Button("Pause");
+        pause.setOnAction((ActionEvent even) -> {
+        System.out.println("aused!");
+        controller.pause();
+    });
+    Button resume = new Button("Resume");
+        resume.setOnAction((ActionEvent even) -> {
+        System.out.println("Resume");
+        controller.resume();
+    });
+        vBox.getChildren().addAll(solve,pause,resume);
     GridPane pane = new GridPane();
+    pane.setAlignment(Pos.CENTER);
+    borderPane.setTop(toolBar);
+    borderPane.setCenter(pane);
+    borderPane.setLeft(vBox);
+    //borderPane.setPadding(new Insets(10, 20, 10, 20));
     GridPane[][] quadrents = new GridPane[3][3];
     for (int row=0;row<3;row++) {
         for (int col=0;col<3;col++) {
@@ -47,7 +77,7 @@ public class Interface extends Application {
         }
     }
 
-    Scene scene = new Scene(pane,450,450);
+    Scene scene = new Scene(borderPane,600,500);
     stage.setScene(scene);
     controller = new Controller(this);
     stage.show();
