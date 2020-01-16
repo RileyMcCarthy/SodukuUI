@@ -12,12 +12,14 @@ public class Controller {
     private Soduku level;
     private Interface gui;
     private Timeline timeline;
+    private double period = 0.01;
     private int row = 0;
     private int col = 0;
 
     public Controller(Interface theGui) {
         gui = theGui;
         level = new Soduku();
+        initBoard();
     }
 
     public void initBoard() {
@@ -33,7 +35,7 @@ public class Controller {
     }
 
     public void startSolving() {
-        timeline = new Timeline(new KeyFrame(Duration.seconds(0.01), e-> {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(period), e-> {
 
             Cell temp = level.getNextStep();
             if (temp==null) {
@@ -58,6 +60,12 @@ public class Controller {
 
     public void resume() {
         timeline.play();
+    }
+
+    public void setPeriod(double thePeriod) {
+        period = thePeriod;
+        timeline.stop();
+        startSolving();
     }
 
     public void updateCellValue(int row, int col, int value) {

@@ -29,6 +29,10 @@ public class Soduku {
         solver.solveBoard();
     }
 
+    public void importBoard() {
+
+    }
+
     public Cell getNextStep() {
         return solver.getNextStep();
     }
