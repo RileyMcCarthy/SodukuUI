@@ -36,8 +36,7 @@ public class Soduku {
     }
 
     public void newGame() {
-        boardArray = getZero();
-        board = new Board(boardArray);
+        board = new Board();
         answer = new Solver(board);
         answer.solveBoard();
     }
@@ -51,16 +50,6 @@ public class Soduku {
         board = new Board(boardArray);
         answer = new Solver(board);
         answer.solveBoard();
-    }
-
-    private int[][] getZero() {
-        int[][] temp = new int[9][9];
-        for (int i=0;i<9;i++) {
-            for (int j=0;j<0;j++) {
-                boardArray[i][j] = 0;
-            }
-        }
-        return temp;
     }
 
     public void importGame(String adrs) {

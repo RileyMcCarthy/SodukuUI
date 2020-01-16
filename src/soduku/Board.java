@@ -15,11 +15,27 @@ import java.util.Collections;
 public class Board {
     
     private ArrayList<Cell> boardList;
-    
+
+    public Board() {
+        boardList = new ArrayList<Cell>();
+        initBoardList(getZero());
+    }
+
     public Board(int[][] theBoard) {
         boardList = new ArrayList<Cell>();
         initBoardList(theBoard);
     }
+
+    private int[][] getZero() {
+        int[][] temp = new int[9][9];
+        for (int i=0;i<9;i++) {
+            for (int j=0;j<0;j++) {
+                temp[i][j] = 0;
+            }
+        }
+        return temp;
+    }
+
 
     public Cell getCell(int pos) {
         return boardList.get(pos);
