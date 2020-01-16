@@ -13,8 +13,11 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
+
+import java.io.File;
 
 public class Interface extends Application {
 
@@ -43,7 +46,18 @@ public class Interface extends Application {
     private ToolBar getToolBar() {
         ToolBar toolBar = new ToolBar();
         Button newGame = new Button("New");
+        newGame.setOnAction((ActionEvent event) -> {
+            controller.newBoard();
+        });
         Button openGame = new Button("Open");
+            openGame.setOnAction((ActionEvent event) -> {
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Select Save File");
+                File saveFile = fileChooser.showOpenDialog(stage);
+                String path = saveFile.getPath();
+                if (path != null)
+                    controller.getBoard(saveFile.getPath());
+            });
         toolBar.getItems().addAll(newGame, openGame);
         return toolBar;
     }
@@ -113,7 +127,7 @@ public class Interface extends Application {
                 cells[row][col].setTextFill(Color.BLACK);
                 //cells[row][col].setStyle("-fx-background-color:WHITE;-fx-border-color: black;");
             }else {
-                cells[row][col].setTextFill(Color.GREEN);
+                cells[row][col].setTextFill(Color.HOTPINK);
                 //cells[row][col].setStyle("-fx-background-color:GREEN;-fx-border-color: black;");
             }
         }

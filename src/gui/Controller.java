@@ -19,13 +19,21 @@ public class Controller {
     public Controller(Interface theGui) {
         gui = theGui;
         level = new Soduku();
-        initBoard();
     }
 
-    public void initBoard() {
-        Board solved = level.getSolvedBoard();
+    public void getBoard(String adrs) {
+        level.getGame(adrs);
+        updateBoard();
+    }
+
+    public void newBoard() {
+        level.newGame();
+        updateBoard();
+    }
+
+    private void updateBoard() {
         for (int i=0;i<81;i++) {
-            Cell temp = solved.getCell(i);
+            Cell temp = level.getCell(i);
             if (temp.isOriginal()) {
                 gui.updateCell(temp.getRow(), temp.getCol(), temp.getValue(),true);
             }else {
@@ -41,7 +49,6 @@ public class Controller {
             if (temp==null) {
                 timeline.stop();
             }else {
-                System.out.println(temp.getValue() + " pos:" + temp.getRow() + " " + temp.getCol());
                 gui.updateCell(temp.getRow(), temp.getCol(), temp.getValue(), false);
                 col++;
                 if (col % 9 == 0) {
@@ -66,10 +73,6 @@ public class Controller {
         period = thePeriod;
         timeline.stop();
         startSolving();
-    }
-
-    public void updateCellValue(int row, int col, int value) {
-
     }
 
 }

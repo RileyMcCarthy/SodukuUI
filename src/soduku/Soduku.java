@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class Soduku {
 
-    Solver solver;
+    Solver answer;
 
    // private static int[][] tempboard = { {0,0,0,0,8,0,0,0,0},
     //                          {8,0,9,0,7,1,0,2,0},
@@ -29,18 +29,50 @@ public class Soduku {
     //                          {1,0,0,0,4,0,3,0,0} };
     private int[][] boardArray;
 
+    private Board board;
+
     public Soduku() {
-        boardArray = importBoard();
-        Board board = new Board(boardArray);
-        solver = new Solver(board);
-        solver.solveBoard();
+        newGame();
     }
 
-    public int[][] importBoard() {
+    public void newGame() {
+        boardArray = getZero();
+        board = new Board(boardArray);
+        answer = new Solver(board);
+        answer.solveBoard();
+    }
+
+    public void getGame(String adrs) {
+        boardArray = importBoard(adrs);
+        if (boardArray==null) {
+            System.out.println("cant find board");
+            return;
+        }
+        board = new Board(boardArray);
+        answer = new Solver(board);
+        answer.solveBoard();
+    }
+
+    private int[][] getZero() {
+        int[][] temp = new int[9][9];
+        for (int i=0;i<9;i++) {
+            for (int j=0;j<0;j++) {
+                boardArray[i][j] = 0;
+            }
+        }
+        return temp;
+    }
+
+    public void importGame(String adrs) {
+
+    }
+
+    private int[][] importBoard(String adrs) {
+        System.out.println(adrs);
         BufferedReader reader;
         int[][] tempBoard = new int[9][9];
         try {
-            reader = new BufferedReader(new FileReader("gameData.txt"));
+            reader = new BufferedReader(new FileReader(adrs));
             String row;
             int i = 0;
             while((row = reader.readLine())!=null) {
@@ -67,11 +99,19 @@ public class Soduku {
     }
 
     public Cell getNextStep() {
-        return solver.getNextStep();
+        return answer.getNextStep();
     }
 
-    public Board getSolvedBoard() {
-        return solver.getBoard();
+    public Cell getAnswer(int pos) {
+        if (answer == null) {
+            System.out.println("No Answer");
+        }
+
+        return answer.getBoard().getCell(pos);
+    }
+
+    public Cell getCell(int pos) {
+        return board.getCell(pos);
     }
     
 }
