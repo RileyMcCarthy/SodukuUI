@@ -12,6 +12,7 @@ import java.util.Collections;
  *
  * @author Riley McCarthy
  */
+
 public class Board {
     
     private ArrayList<Cell> boardList;
@@ -77,18 +78,9 @@ public class Board {
     private void initBoardList(int[][] theBoard) {
         for (int row=0;row<9;row++) {
             for (int col=0;col<9;col++) {
-                Cell temp = new Cell();
-                
-                if (theBoard[row][col] == 0) {
-                    temp.setOriginal(false);
-                }else {
-                    temp.setOriginal(true);
-                }
-                temp.setValue(theBoard[row][col]);
-                System.out.println("ROWS: "+row);
-                temp.setRow(row);
-                temp.setCol(col);
-                boardList.add(temp);
+                int pos = row*9+col;
+                int value = theBoard[row][col];
+                boardList.add(new Cell(pos,value, value!=0));
             }
         }
     }

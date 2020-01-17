@@ -34,10 +34,12 @@ public class Controller {
     private void updateBoard() {
         for (int i=0;i<81;i++) {
             Cell temp = level.getCell(i);
+            int cellRow = temp.getPos()/9;
+            int cellCol = temp.getPos()%9;
             if (temp.isOriginal()) {
-                gui.updateCell(temp.getRow(), temp.getCol(), temp.getValue(),true);
+                gui.updateCell(cellRow, cellCol, temp.getValue(),true);
             }else {
-                gui.updateCell(temp.getRow(), temp.getCol(), 0,false);
+                gui.updateCell(cellRow, cellCol, 0,false);
             }
         }
     }
@@ -46,10 +48,12 @@ public class Controller {
         timeline = new Timeline(new KeyFrame(Duration.seconds(period), e-> {
 
             Cell temp = level.getNextStep();
+            int cellRow = temp.getPos()/9;
+            int cellCol = temp.getPos()%9;
             if (temp==null) {
                 timeline.stop();
             }else {
-                gui.updateCell(temp.getRow(), temp.getCol(), temp.getValue(), false);
+                gui.updateCell(cellRow, cellCol, temp.getValue(), false);
                 col++;
                 if (col % 9 == 0) {
                     row++;

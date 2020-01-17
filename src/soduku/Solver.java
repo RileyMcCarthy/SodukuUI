@@ -77,8 +77,7 @@ public class Solver {
 
     public Cell copyCell(Cell cell) {
         Cell temp = new Cell();
-        temp.setRow(cell.getRow());
-        temp.setCol(cell.getCol());
+        temp.setPos(cell.getPos());
         temp.setOptions(cell.getOptions());
         temp.setOriginal(cell.isOriginal());
         temp.setValue(cell.getValue());

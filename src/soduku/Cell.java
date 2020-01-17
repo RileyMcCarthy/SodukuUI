@@ -15,27 +15,25 @@ public class Cell {
     private ArrayList<Integer> options;
     private boolean original = false;
     private int value = 0;
-    private int row = 0;
-    private int col = 0;
+    private int pos;
     
     public Cell() {
         options = new ArrayList<Integer>();
     }
 
-    public void setRow(int theRow) {
-        row = theRow;
+    public Cell(int thePos, int theValue,boolean theOriginal) {
+        options = new ArrayList<Integer>();
+        pos = thePos;
+        value = theValue;
+        original = theOriginal;
     }
 
-    public int getRow() {
-        return row;
+    public void setPos(int thePos) {
+        pos = thePos;
     }
 
-    public void setCol(int theCol) {
-        col = theCol;
-    }
-
-    public int getCol() {
-        return col;
+    public int getPos() {
+        return pos;
     }
 
     public void setOptions(ArrayList<Integer> theOptions) {

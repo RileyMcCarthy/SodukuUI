@@ -1,6 +1,6 @@
 module SodukuUI {
+    requires javafx.controls;
     requires javafx.fxml;
-    requires  javafx.controls;
 
     opens gui;
 }
