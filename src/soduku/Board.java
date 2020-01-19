@@ -92,7 +92,11 @@ public class Board {
         int row = pos/9;
         int col = pos%9;
         if (cell.isOriginal()) {
-            cell.setOptions(new ArrayList<Integer>());
+            ArrayList<Integer> temp = new ArrayList<Integer>();
+            temp.add(cell.getValue());
+            System.out.println("Updating cell: "+pos+" with: "+temp);
+            cell.setOptions(temp);
+            return;
         }
         //Check row
         ArrayList<Integer> rowCells = getRow(row);

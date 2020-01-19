@@ -73,7 +73,7 @@ public class Interface extends Application {
             controller.pause();
         });
 
-        Slider slider = new Slider(0, 0.1, 0.01);
+        Slider slider = new Slider(0.001, 0.1, 0.005);
         slider.setShowTickMarks(true);
         slider.setShowTickLabels(true);
         slider.setMajorTickUnit(0.1f);

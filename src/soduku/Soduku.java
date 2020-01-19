@@ -18,16 +18,16 @@ public class Soduku {
 
     Solver answer;
 
-   // private static int[][] tempboard = { {0,0,0,0,8,0,0,0,0},
-    //                          {8,0,9,0,7,1,0,2,0},
-    //                       {4,0,3,5,0,0,0,0,1},
-    //                          {0,0,0,1,0,0,0,0,7},
-    //                          {0,0,2,0,3,4,0,8,0},
-    //                          {7,3,0,0,0,9,0,0,4},
-    //                          {9,0,0,0,0,0,7,0,2},
-    //                          {0,0,8,2,0,5,0,9,0},
-    //                          {1,0,0,0,4,0,3,0,0} };
-    private int[][] boardArray;
+    private static int[][] boardArray = { {0,0,0,0,8,0,0,0,0},
+                              {8,0,9,0,7,1,0,2,0},
+                           {4,0,3,5,0,0,0,0,1},
+                              {0,0,0,1,0,0,0,0,7},
+                              {0,0,2,0,3,4,0,8,0},
+                              {7,3,0,0,0,9,0,0,4},
+                              {9,0,0,0,0,0,7,0,2},
+                              {0,0,8,2,0,5,0,9,0},
+                              {1,0,0,0,4,0,3,0,0} };
+    //private int[][] boardArray;
 
     private Board board;
 
@@ -36,7 +36,7 @@ public class Soduku {
     }
 
     public void newGame() {
-        board = new Board();
+        board = new Board(boardArray);
         answer = new Solver(board);
         answer.solveBoard();
     }
@@ -50,10 +50,6 @@ public class Soduku {
         board = new Board(boardArray);
         answer = new Solver(board);
         answer.solveBoard();
-    }
-
-    public void importGame(String adrs) {
-
     }
 
     private int[][] importBoard(String adrs) {

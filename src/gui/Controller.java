@@ -19,6 +19,7 @@ public class Controller {
     public Controller(Interface theGui) {
         gui = theGui;
         level = new Soduku();
+        updateBoard();
     }
 
     public void getBoard(String adrs) {
@@ -48,12 +49,17 @@ public class Controller {
         timeline = new Timeline(new KeyFrame(Duration.seconds(period), e-> {
 
             Cell temp = level.getNextStep();
+            if (temp==null) {
+                timeline.stop();
+                return;
+            }
             int cellRow = temp.getPos()/9;
             int cellCol = temp.getPos()%9;
             if (temp==null) {
                 timeline.stop();
             }else {
-                gui.updateCell(cellRow, cellCol, temp.getValue(), false);
+                if (!temp.isOriginal())
+                    gui.updateCell(cellRow, cellCol, temp.getValue(), false);
                 col++;
                 if (col % 9 == 0) {
                     row++;
