@@ -5,6 +5,7 @@
  */
 package soduku;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -27,11 +28,29 @@ public class Solver {
     }
     
     public void solveBoard() {
-        head = createTree(head);
+        head = new CellNode();
+        head.setDepth(-1);
+        createTree(head);
         if (board != null) {
             board.printBoard();
         }else {
             System.out.println("solving failed!");
+        }
+        System.out.println("Printing Tree Board");
+        CellNode current = head;
+
+        while(current!=null) {
+            System.out.println("Value:"+current.getValue());
+            System.out.println("Depth:"+current.getDepth());
+            if (current.getDepth()==80)
+                break;
+            ArrayList<CellNode> nodes = current.getNodeArray();
+            for (CellNode node : nodes) {
+                if (!node.isDead()) {
+                    current = node;
+                    break;
+                }
+            }
         }
     }
 
@@ -39,11 +58,6 @@ public class Solver {
         board.printBoard();
         System.out.println("New Node:");
         int depth;
-        if (node==null) {
-            System.out.println("    First Node!");
-            node = new CellNode();
-            node.setDepth(-1);
-        }
 
         depth = node.getDepth();
         System.out.println("    Depth: "+depth);
@@ -68,8 +82,11 @@ public class Solver {
             board.setCellValue(depth+1,child.getValue());
             steps.add(copyCell(board.getCell(depth+1)));
             CellNode temp = createTree(child);
-            if (temp != null)
-                return createTree(temp);
+            if (temp != null) {
+                System.out.println("Not dead!");
+                return temp;
+            }
+
         }
 
         if (!node.isOriginal()) {
